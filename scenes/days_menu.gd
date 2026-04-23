@@ -20,7 +20,7 @@ var b7yb = 0
 @onready var button4 = $day4/Button4
 @onready var button5 = $day5/Button5
 @onready var button6 = $day6/Button6
-@onready var backbutton = $backbutton
+@onready var backbutton = $back/backbutton
 @onready var button7 = $day7/Button7
 
 var b1scaletarget = 1.0
@@ -29,15 +29,19 @@ var b3scaletarget = 1.0
 var b4scaletarget = 1.0
 var b5scaletarget = 1.0
 var b6scaletarget = 1.0
+var bbrottarget = 0.0
 var b1v = 0.0
 var b2v = 0.0
 var b3v = 0.0
 var b4v = 0.0
 var b5v = 0.0
 var b6v = 0.0
+var bbrv = 0.0
 var buttonjerk = 20.0
 var buttondamp = 2.0
 var clicking = 0
+var bbjerk = 20.0
+var bbdamp = 2.0
 
 var fadetimer = -1.0
 var fadeduration = 0.5
@@ -115,7 +119,7 @@ func _process(delta: float) -> void:
 					menucontrolflow.mostRecentDay = jumpToScene
 					menucontrolflow.dayStart.emit(jumpToScene)
 					print("Emitted signal menucontrolflow.dayStart(%d)" % jumpToScene)
-					
+					menucontrolflow.stopsound()
 					#ZURI you are gonna want to remove this line of code!!!
 					get_tree().change_scene_to_file("res://scenes/days_menu.tscn")
 				elif jumpToScene == -1:
@@ -178,8 +182,11 @@ func _process(delta: float) -> void:
 	else:
 		b6scaletarget = 1.0
 	if (ishovered(backbutton)):
+		bbrottarget = -0.1
 		if (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
 			clicking = -1
+	else:
+		bbrottarget = 0.0
 	if (ishovered(button7) and not button7.disabled):
 		bobbletimer += delta
 		$day7.global_position = Vector2(b7xb,b7yb) + shakeamp * Vector2(sin(bobbletimer*shakespeed), cos(bobbletimer * (shakespeed * 1.2)))
@@ -192,29 +199,34 @@ func _process(delta: float) -> void:
 	var b4s = $day4.scale.x
 	var b5s = $day5.scale.x
 	var b6s = $day6.scale.x
+	var bbr = $back.rotation
 	var b1a = (b1scaletarget - b1s) * buttonjerk - b1v * buttondamp
 	var b2a = (b2scaletarget - b2s) * buttonjerk - b2v * buttondamp
 	var b3a = (b3scaletarget - b3s) * buttonjerk - b3v * buttondamp
 	var b4a = (b4scaletarget - b4s) * buttonjerk - b4v * buttondamp
 	var b5a = (b5scaletarget - b5s) * buttonjerk - b5v * buttondamp
 	var b6a = (b6scaletarget - b6s) * buttonjerk - b6v * buttondamp
+	var bbra = (bbrottarget - bbr) * bbjerk - bbrv * bbdamp
 	b1v += b1a * delta
 	b2v += b2a * delta
 	b3v += b3a * delta
 	b4v += b4a * delta
 	b5v += b5a * delta
 	b6v += b6a * delta
+	bbrv += bbra * delta
 	b1s += b1v * delta
 	b2s += b2v * delta
 	b3s += b3v * delta
 	b4s += b4v * delta
 	b5s += b5v * delta
 	b6s += b6v * delta
+	bbr += bbrv * delta
 	$day1.scale = Vector2(b1s, b1s)
 	$day2.scale = Vector2(b2s, b2s)
 	$day3.scale = Vector2(b3s, b3s)
 	$day4.scale = Vector2(b4s, b4s)
 	$day5.scale = Vector2(b5s, b5s)
 	$day6.scale = Vector2(b6s, b6s)
+	$back.rotation = bbr
 	
 	ribbons()

@@ -3,6 +3,7 @@ extends Node2D
 @onready var button1 = $background/playbutton/Button
 @onready var button2 = $background/helpbutton/Button2
 @onready var button3 = $menubutton/Button
+@onready var xbutton = $background/xbutton/Button3
 
 var b1scaletarget = 1.0
 var b2scaletarget = 1.0
@@ -17,6 +18,11 @@ var buttondamp = 2.0
 var yjerk = 10.0
 var ydamp = 7.0
 var clicking = 0
+
+var xbuttontimer = 0.0
+var xbuttonspeed = 3.0
+var xbuttonbasescale = 1.0
+var xbuttonscaleamp = 0.1
 
 var fadetimer = -1.0
 var fadeduration = 0.5
@@ -88,6 +94,21 @@ func _process(delta: float) -> void:
 			clicking = 3
 	else:
 		b3scaletarget = 1.0
+	if (ishovered(xbutton)):
+		xbuttontimer += delta
+		var size = xbuttonbasescale + xbuttonscaleamp * sin(xbuttontimer * xbuttonspeed)
+		$background/xbutton.scale = Vector2(size,size)
+		if (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
+			clicking = 3
+	else:
+		var size = $background/xbutton.scale.x
+		var dsize = xbuttonbasescale - size
+		size += dsize * xbuttonspeed * delta
+		if (abs(dsize) < 0.01):
+			$background/xbutton.scale = Vector2(xbuttonbasescale, xbuttonbasescale)
+			xbuttontimer = 0.0
+		else:
+			$background/xbutton.scale = Vector2(size, size)
 	
 	var b1s = $background/playbutton.scale.x
 	var b2s = $background/helpbutton.scale.x
@@ -109,6 +130,7 @@ func _process(delta: float) -> void:
 	$background/helpbutton.scale = Vector2(b2s, b2s)
 	$menubutton.scale = Vector2(b3s, b3s)
 	$background.global_position.y = y
+	$menubutton.global_position.y = -360.0-y
 	if y < -360:
 		$background.visible = false
 	else:

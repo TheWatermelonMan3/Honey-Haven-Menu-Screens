@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cmxavb17xce58"
+path="res://.godot/imported/Honey Haven Title.mp3-0bb55e8d67fd2815870afe6f1897e630.mp3str"
+
+[deps]
+
+source_file="res://sound/Honey Haven Title.mp3"
+dest_files=["res://.godot/imported/Honey Haven Title.mp3-0bb55e8d67fd2815870afe6f1897e630.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -49,6 +49,7 @@ func _ready() -> void:
 	titlebasex = $title.global_position.x
 	titlebasey = $title.global_position.y
 	$FADE.visible = true
+	menucontrolflow.playsound()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

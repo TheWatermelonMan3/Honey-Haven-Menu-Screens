@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://hh65ubbmvn8j" path="res://menu_images/Homebutton.png" id="3_7l7mv"]
 [ext_resource type="Texture2D" uid="uid://b8jhm706yce8x" path="res://menu_images/Helpbutton.png" id="4_v4r4p"]
 [ext_resource type="Texture2D" uid="uid://n106suyfnpmj" path="res://menu_images/Menubutton.png" id="5_7l7mv"]
+[ext_resource type="Texture2D" uid="uid://dhs0ercsi2mdx" path="res://menu_images/Xbutton.png" id="5_v4r4p"]
 
 [node name="MainMenu" type="Node2D" unique_id=149552937]
 script = ExtResource("1_v4r4p")
@@ -51,6 +52,20 @@ offset_top = -18.0
 offset_right = 335.0
 offset_bottom = 36.0
 pivot_offset = Vector2(349, 25)
+
+[node name="xbutton" type="Sprite2D" parent="background" unique_id=140267831]
+position = Vector2(370, -248)
+texture = ExtResource("5_v4r4p")
+offset = Vector2(-370, 248)
+
+[node name="Button3" type="Button" parent="background/xbutton" unique_id=1438442982]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -31.0
+offset_top = -29.0
+offset_right = 30.0
+offset_bottom = 35.0
+pivot_offset = Vector2(32, 31)
 
 [node name="menubutton" type="Sprite2D" parent="." unique_id=1679508886]
 position = Vector2(65, 39)

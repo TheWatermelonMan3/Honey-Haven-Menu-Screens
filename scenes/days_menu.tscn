@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://wsdtqgst3k1j" path="res://menu_images/Day5button.png" id="8_g5n8x"]
 [ext_resource type="Texture2D" uid="uid://duo1r2cujkvyj" path="res://menu_images/Day6button.png" id="9_4tfk8"]
 [ext_resource type="Texture2D" uid="uid://bwlra7x0vqhn2" path="res://menu_images/Epiloguebutton.png" id="11_4tfk8"]
+[ext_resource type="Texture2D" uid="uid://c2evorug54jde" path="res://menu_images/Backbutton.png" id="12_pqbx1"]
 
 [node name="DaysMenu" type="Node2D" unique_id=149552937]
 script = ExtResource("1_83cfp")
@@ -161,9 +162,16 @@ offset_right = 1300.0
 offset_bottom = 746.0
 color = Color(0, 0, 0, 1)
 
-[node name="backbutton" type="Button" parent="." unique_id=845927788]
-offset_left = 216.0
-offset_top = 148.0
-offset_right = 261.0
-offset_bottom = 179.0
-text = "Back"
+[node name="back" type="Sprite2D" parent="." unique_id=938114487]
+position = Vector2(214, 616)
+texture = ExtResource("12_pqbx1")
+offset = Vector2(426, -256)
+
+[node name="backbutton" type="Button" parent="back" unique_id=845927788]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -35.0
+offset_top = -19.0
+offset_right = 44.0
+offset_bottom = 23.0
+pivot_offset = Vector2(38, 22)
